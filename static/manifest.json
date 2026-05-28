@@ -1,0 +1,15 @@
+{
+   "name": "Ace Counter",
+   "short_name": "Ace",
+   "start_url": "/",
+   "display": "standalone",
+   "background_color": "",
+   "theme-color": "",
+   "icons": [
+      {
+         "src": "/static/icon-512.png",
+         "sizes": "512x512",
+         "type": "image/png"
+      }
+   ]
+}
