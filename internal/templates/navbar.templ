@@ -1,0 +1,24 @@
+package templates
+
+templ navbar(selected int) {
+   <nav id="navbar">
+      @navbarItem("/", selected == 0)
+      @navbarItem("/counter", selected == 1)
+   </nav>
+}
+
+func getIcon(url string, selected bool) templ.Component {
+   switch url {
+      case "/":
+         return HomeIcon(selected)
+      case "/counter":
+         return CounterIcon(selected)
+
+      default:
+         return nil
+   }
+}
+
+templ navbarItem(url string, selected bool) {
+   <a class="nav-item" href={url}>@getIcon(url, selected)</a>
+}

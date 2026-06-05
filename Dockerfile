@@ -16,6 +16,8 @@ WORKDIR /app
 COPY --from=builder /app/app .
 COPY --from=builder /app/static ./static
 
+VOLUME ["/data"]
+
 EXPOSE 8080
 
 CMD ["./app"]

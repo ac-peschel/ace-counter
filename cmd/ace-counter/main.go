@@ -1,19 +1,25 @@
 package main
 
 import (
+	"log"
 	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
-	mw "github.com/ac-peschel/ace-counter/internal/middleware"
+	"github.com/ac-peschel/ace-counter/internal/db"
 	"github.com/ac-peschel/ace-counter/internal/router"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
 
 func main() {
+	sqliteDb, err := db.Open("./data/ace.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	r := chi.NewRouter()
 
@@ -23,9 +29,8 @@ func main() {
 	r.Group(func(r chi.Router) {
 		r.Use(
 			middleware.Logger,
-			mw.CPSMiddleware,
 		)
-		router.HandleRoutes(r)
+		router.HandleRoutes(r, sqliteDb)
 	})
 
 	killSig := make(chan os.Signal, 1)

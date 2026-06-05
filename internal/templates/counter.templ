@@ -1,0 +1,54 @@
+package templates
+
+import "github.com/ac-peschel/ace-counter/internal/model"
+
+templ Counter(existingCounter []model.Counter) {
+   <div class="button-container">
+      @addNewCounter()
+   </div>
+   <div class="main">
+      for _, c := range existingCounter {
+         @displayCounter(c)
+      }
+   </div>
+   @navbar(1)
+}
+
+templ EditCounter(counter model.Counter) {
+   <div id="header">
+      <div>Edit Counter</div>
+      <div>
+         <a class="button-dark button-close" href="/counter">X</a>
+      </div>
+   </div>
+   <div class="main">
+      <div class="label">Name</div>
+      <input name="cname" type="text" value={counter.Name} />
+      <div class="label">Owner</div>
+      <input name="cowner" type="text" value={counter.Owner} />
+   </div>
+   <div class="button-footer">
+      <button class="button-dark" hx-get={counter.GetDeleteUrl()}>Delete</button>
+      <button
+         class="button"
+         hx-post={counter.GetSaveUrl()}
+         hx-include="[name='cname'], [name='cowner']"
+      >
+         Save
+      </button>
+   </div>
+}
+
+templ displayCounter(counter model.Counter) {
+   <div class="counter-card">
+      <div class="counter-inner">
+         <div class="counter-title">{counter.Name}</div>
+         <div class="counter-owner">{counter.Owner}</div>
+      </div>
+      <a class="button" href={counter.GetEditUrl()}>@EditIcon()</a>
+   </div>
+}
+
+templ addNewCounter() {
+   <button class="button-dark" hx-get="/counter/create">Add Counter</button>
+}

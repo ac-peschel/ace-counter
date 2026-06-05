@@ -1,18 +1,19 @@
 package templates
 
 templ Layout(c templ.Component) {
-   <head>
-      <title>Ace Counter</title>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="manifest" href="/static/manifest.json">
-      <meta name="theme-color" content="#ffffff">
-      <link rel="stylesheet" href="/static/style.css">
-      <script src="/static/htmx.min.js"></script>
-   </head>
-   <body>
-      <main>
+   <!doctype html>
+   <html>
+      <head>
+         <title>Ace Counter</title>
+         <meta charset="UTF-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <link rel="manifest" href="/static/manifest.json">
+         <meta name="theme-color" content="#ffffff">
+         @style()
+      </head>
+      <body>
          @c
-      </main>
-   </body>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.7/htmx.min.js" integrity="sha512-IisGoumHahmfNIhP4wUV3OhgQZaaDBuD6IG4XlyjT77IUkwreZL3T3afO4xXuDanSalZ57Un+UlAbarQjNZCTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      </body>
+   </html>
 }

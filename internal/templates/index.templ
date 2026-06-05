@@ -1,5 +1,23 @@
 package templates
 
-templ Index() {
-   <div id="tmp">kleine Hexe &lt;3</div>
+import "github.com/ac-peschel/ace-counter/internal/model"
+
+templ Index(incs []model.Increment) {
+   <div class="main">
+      for _, i := range incs {
+         @displayIncrement(i)
+      }
+   </div>
+   @navbar(0)
+}
+
+templ displayIncrement(increment model.Increment) {
+   <div class="counter-card">
+      <div class="counter-inner">
+         <div class="counter-title">{increment.Counter.Name}</div>
+         <div class="counter-owner">{increment.Counter.Owner}</div>
+         <div >{increment.Sum}</div>
+      </div>
+      <button class="button button-increment" hx-get={increment.GetIncrementUrl()}>+</button>
+   </div>
 }
