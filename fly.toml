@@ -19,5 +19,5 @@ primary_region = 'ams'
   memory_mb = 256
 
 [mounts]
-   source = "vol_rnzm0291gwgn1m0r"
+   source = "data"
    destination = "/data"
