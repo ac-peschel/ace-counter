@@ -16,7 +16,7 @@ import (
 
 func main() {
 	os.MkdirAll("/data", 0o755)
-	sqliteDb, err := db.Open("./data/ace.db")
+	sqliteDb, err := db.Open("/data/ace.db")
 	if err != nil {
 		log.Fatal(err)
 	}
